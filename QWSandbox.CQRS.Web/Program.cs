@@ -1,9 +1,13 @@
+using System.Reflection;
+using MediatR;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-IMvcBuilder mvcBuilder = builder.Services.AddControllersWithViews();
+IServiceCollection services = builder.Services;
+services.AddMediatR(Assembly.GetExecutingAssembly());
 
-
+IMvcBuilder mvcBuilder = services.AddControllersWithViews();
 mvcBuilder.AddRazorRuntimeCompilation();
 
 var app = builder.Build();
@@ -13,7 +17,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    
+    // Don't use hsts!!!
+    //app.UseHsts();
 }
 
 app.UseHttpsRedirection();
