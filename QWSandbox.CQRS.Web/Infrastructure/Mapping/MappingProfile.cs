@@ -23,7 +23,7 @@ namespace QWSandbox.CQRS.Web.Infrastructure.Mapping
                 .ForMember(x => x.UpdatedAt, x => x.Ignore())
                 .ForMember(x => x.UpdatedBy, x => x.Ignore());
 
-            CreateMap<GetUsersRequest, UserModel>();
+            CreateMap<AddUserNotification, UserModel>();
         }
     }
 }

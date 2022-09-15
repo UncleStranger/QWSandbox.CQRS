@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using QWSandbox.CQRS.Web.Services;
+using QWSandbox.CQRS.Web.Services.Default;
 
 namespace QWSandbox.CQRS.Web.Infrastructure.DI
 {
@@ -20,7 +21,8 @@ namespace QWSandbox.CQRS.Web.Infrastructure.DI
             services.AddMediatR(currentAssembly);
 
             // Вопрос именования нужно сразу обсудить. UserService а не UsersService
-            services.AddTransient<IUserDBService, IUserDBService>();
+            services.AddTransient<IUserDBService, UserDBService>();
+            services.AddTransient<IUserCacheService, UserCacheService>();
         }
     }
 }

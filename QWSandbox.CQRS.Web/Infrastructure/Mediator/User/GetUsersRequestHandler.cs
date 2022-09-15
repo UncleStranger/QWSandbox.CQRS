@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics;
+using AutoMapper;
 using MediatR;
 using QWSandbox.CQRS.Domain.Models.User;
 using QWSandbox.CQRS.Web.Services;
@@ -28,6 +29,9 @@ namespace QWSandbox.CQRS.Web.Infrastructure.Mediator.User
         /// <returns></returns>
         public async Task<List<UserModel>> Handle(GetUsersRequest request, CancellationToken cancellationToken)
         {
+            if(Debugger.IsAttached)
+                Debugger.Break();
+
             List<UserModel> users = await _userCacheService.GetUsers();
             if (users == null || !users.Any())
             {

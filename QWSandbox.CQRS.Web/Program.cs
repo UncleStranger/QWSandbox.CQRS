@@ -14,7 +14,11 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Logging.AddSerilog();
+
+builder.Logging
+    .ClearProviders()
+    .AddSerilog();
+
 
 // Add services to the container.
 IServiceCollection services = builder.Services;
