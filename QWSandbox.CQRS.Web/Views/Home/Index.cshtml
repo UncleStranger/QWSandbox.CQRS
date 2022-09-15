@@ -28,9 +28,17 @@
 					@foreach (var user in Model.Users)
 					{
 						<li class="list-group-item">
-<pre>
-@System.Text.RegularExpressions.Regex.Unescape(JsonSerializer.Serialize(user, new JsonSerializerOptions{WriteIndented = true}))
-</pre>
+							<div class="mb-2">
+								<strong>
+									@user.Name (@user.Email)
+								</strong>
+							</div>
+							@if (!String.IsNullOrWhiteSpace(@user.Comment))
+							{
+								<div>
+									@Html.Raw(user.Comment?.Replace("\r\n", "<br>"))
+								</div>
+							}
 						</li>
 					}
 				</ul>
@@ -45,13 +53,13 @@
 			<div class="mb-3">
 				<label class="form-label w-100">
 					Имя
-					<input name="Name" type="text" class="form-control w-100">
+					<input name="Name" type="text" class="form-control w-100" novalidate>
 				</label>
 			</div>
 			<div class="mb-3">
 				<label class="form-label w-100">
 					Email
-					<input name="Email" type="email" class="form-control w-100" placeholder="name@example.com">
+					<input name="Email" type="email" class="form-control w-100" placeholder="name@example.com" novalidate>
 				</label>
 			</div>
 			<div class="mb-3">

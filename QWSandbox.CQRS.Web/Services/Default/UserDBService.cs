@@ -14,17 +14,17 @@ namespace QWSandbox.CQRS.Web.Services.Default
         {
             new()
             {
+                Id = Guid.Parse("46c8ad8a-d4af-4b73-b098-4f3ffe37d2c6"),
+                Name = "Лука Мудищев",
+                Email = "luka@mudishev.com",
+                Comment = "Лука Мудищев был дородный\r\nМужчина лет так сорока.\r\nЖил вечно пьяный и голодный\r\nВ каморке возле кабака."
+            },
+            new()
+            {
                 Id = Guid.Parse("d78a88fd-5694-4356-80e4-333db9b324f0"),
                 Name = "Василий Пупкин",
                 Email = "v@pupkin.com",
                 Comment = "Комментарий Василия Пупкина"
-            },
-            new()
-            {
-                Id = Guid.Parse("46c8ad8a-d4af-4b73-b098-4f3ffe37d2c6"),
-                Name = "Лука Мудищев",
-                Email = "luka@mudishev.com",
-                Comment = "Лука Мудищев был дородный\r\n\r\nМужчина лет так сорока.\r\n\r\nЖил вечно пьяный и голодный\r\n\r\nВ каморке возле кабака."
             }
         };
 

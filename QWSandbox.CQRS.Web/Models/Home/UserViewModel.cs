@@ -15,7 +15,9 @@ namespace QWSandbox.CQRS.Web.Models.Home
         [Required]
         public string Name { get; set; }
 
-        [StringLength(20)]
-        public string Comment { get; set; }
+        /// <summary>
+    /// a.evdokimov: Question annotation ??
+        /// </summary>
+        public string? Comment { get; set; }
     }
 }

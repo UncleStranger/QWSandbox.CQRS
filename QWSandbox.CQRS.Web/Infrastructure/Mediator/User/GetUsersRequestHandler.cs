@@ -11,11 +11,16 @@ namespace QWSandbox.CQRS.Web.Infrastructure.Mediator.User
         private readonly IMapper _mapper;
         private readonly IUserCacheService _userCacheService;
         private readonly IUserDBService _userDbService;
-        public GetUsersRequestHandler(IMapper mapper, IUserCacheService userCacheService, IUserDBService userDbService)
+        private readonly ILogger<GetUsersRequestHandler> _logger;
+        public GetUsersRequestHandler(IMapper mapper, 
+            IUserCacheService userCacheService, 
+            IUserDBService userDbService,
+            ILogger<GetUsersRequestHandler> logger)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _userCacheService = userCacheService ?? throw new ArgumentNullException(nameof(userCacheService));
             _userDbService = userDbService ?? throw new ArgumentNullException(nameof(userDbService));
+            _logger = logger ?? throw new NotImplementedException(nameof(logger));
         }
 
         /// <summary>
@@ -29,8 +34,7 @@ namespace QWSandbox.CQRS.Web.Infrastructure.Mediator.User
         /// <returns></returns>
         public async Task<List<UserModel>> Handle(GetUsersRequest request, CancellationToken cancellationToken)
         {
-            if(Debugger.IsAttached)
-                Debugger.Break();
+            _logger.LogInformation("GetUserRequestHandler executed.");
 
             List<UserModel> users = await _userCacheService.GetUsers();
             if (users == null || !users.Any())

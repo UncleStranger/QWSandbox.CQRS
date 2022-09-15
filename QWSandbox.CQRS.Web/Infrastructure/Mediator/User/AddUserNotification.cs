@@ -6,6 +6,7 @@ namespace QWSandbox.CQRS.Web.Infrastructure.Mediator.User
 	public class AddUserNotification: INotification
 	{
 		public string Name { get; set; }
+		public string Email { get; set; }
 		public string Comment { get; set; }
 	}
 }

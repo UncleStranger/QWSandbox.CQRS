@@ -32,21 +32,27 @@ namespace QWSandbox.CQRS.Web.Controllers
 
             var userViewModels = _mapper.Map<List<UserViewModel>>(userModels);
 
-            return View(new HomeViewModel
+            return View("Index", new HomeViewModel
             {
                 Users = userViewModels
             });
         }
 
         [HttpPost("")]
-        public IActionResult Index(UserViewModel model)
+        public async Task<IActionResult> AddUser(UserViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return await Index();
             }
 
 
+            // a.evdokimov Tooo many converts. Why notification and commands not contain model?
+            // a.evdokimov Create ProjectTo example for EF
+
+            var user = _mapper.Map<UserModel>(model);
+            var addUserNotification = _mapper.Map<AddUserNotification>(user);
+            _mediator.Publish(addUserNotification);
 
             return RedirectToAction("Index");
         }
