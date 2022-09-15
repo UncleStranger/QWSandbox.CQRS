@@ -1,14 +1,17 @@
 using System.Reflection;
 using MediatR;
+using QWSandbox.CQRS.Web.Infrastructure.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 IServiceCollection services = builder.Services;
-services.AddMediatR(Assembly.GetExecutingAssembly());
+services.AddQWServices();
 
 IMvcBuilder mvcBuilder = services.AddControllersWithViews();
 mvcBuilder.AddRazorRuntimeCompilation();
+
+
 
 var app = builder.Build();
 

@@ -1,0 +1,1 @@
+﻿global using QWSandbox.CQRS.Domain.Base;

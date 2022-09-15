@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QWSandbox.CQRS.Domain.Base;
 
 namespace QWSandbox.CQRS.Domain.Models.User
 {
-	public class UserModel
+	public class UserModel : Auditable
     {
         public Guid Id { get; set; }
         public string Email { get; set; }
