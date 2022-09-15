@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QWSandbox.CQRS.Web.Models;
 using System.Diagnostics;
+using MediatR;
 using QWSandbox.CQRS.Web.Models.Home;
 
 namespace QWSandbox.CQRS.Web.Controllers
@@ -8,15 +9,18 @@ namespace QWSandbox.CQRS.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMediator _mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet("")]
         public IActionResult Index()
         {
+            _logger.LogError("Test error");
             return View();
         }
 

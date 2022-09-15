@@ -1,12 +1,29 @@
 using System.Reflection;
 using MediatR;
 using QWSandbox.CQRS.Web.Infrastructure.DI;
+using Serilog.Events;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    //.WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message}{NewLine}{Exception}"/*, theme: AnsiConsoleTheme.Code*/)
+    .WriteTo.Console()
+    .WriteTo.Debug(outputTemplate: "{Timestamp:yyyy.MM.dd HH:mm:ss.fff} [{Level:u3}] {Message}{NewLine}{Exception}")
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddSerilog();
 
 // Add services to the container.
 IServiceCollection services = builder.Services;
+
 services.AddQWServices();
+
+
+services.AddResponseCaching();
+services.AddDistributedMemoryCache();
 
 IMvcBuilder mvcBuilder = services.AddControllersWithViews();
 mvcBuilder.AddRazorRuntimeCompilation();
@@ -14,6 +31,8 @@ mvcBuilder.AddRazorRuntimeCompilation();
 
 
 var app = builder.Build();
+
+//app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

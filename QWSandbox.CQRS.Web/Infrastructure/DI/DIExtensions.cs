@@ -20,7 +20,7 @@ namespace QWSandbox.CQRS.Web.Infrastructure.DI
             services.AddMediatR(currentAssembly);
 
             // Вопрос именования нужно сразу обсудить. UserService а не UsersService
-            services.AddTransient<IUserService, IUserService>();
+            services.AddTransient<IUserDBService, IUserDBService>();
         }
     }
 }
